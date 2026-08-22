@@ -436,12 +436,13 @@
     100% { background-position:-100% 0; }
   }
 
-  /* ===== flag corner ===== */
+  /* ===== flag (centered) ===== */
   .flag-corner{
     position:absolute;
-    top:10px; left:10px;
-    width:56px;
-    z-index:6;
+    top:88px; left:50%;
+    transform:translateX(-50%);
+    width:54px;
+    z-index:4;
     filter:drop-shadow(0 4px 10px rgba(0,0,0,0.5));
     pointer-events:none;
   }
@@ -449,6 +450,59 @@
     width:100%;
     height:auto;
     display:block;
+  }
+
+  /* ===== top donate board (top-left) ===== */
+  .top-donate{
+    position:absolute;
+    top:14px; left:14px;
+    width:140px;
+    z-index:6;
+  }
+  .top-donate .td-label{
+    font-size:9.5px;
+    letter-spacing:.14em;
+    text-transform:uppercase;
+    color:var(--gold-soft);
+    margin-bottom:5px;
+    text-shadow:0 0 10px rgba(205,164,94,0.3);
+  }
+  .top-donate .td-window{
+    height:56px;
+    overflow:hidden;
+    -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
+    mask-image:linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
+  }
+  .top-donate .td-track{
+    display:flex;
+    flex-direction:column;
+    animation: donateScroll 9s linear infinite;
+  }
+  .top-donate .td-row{
+    height:19px;
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:10.5px;
+    white-space:nowrap;
+    color:#d8d6cf;
+  }
+  .top-donate .td-rank{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    color:var(--gold-soft);
+    font-size:11px;
+    flex-shrink:0;
+  }
+  .top-donate .td-amt{
+    margin-left:auto;
+    color:var(--gold-soft);
+    font-weight:600;
+    flex-shrink:0;
+  }
+  @keyframes donateScroll{
+    0%{ transform:translateY(0); }
+    100%{ transform:translateY(-50%); }
   }
 
   /* ===== qr stickers ===== */
@@ -508,6 +562,23 @@
 
   <div class="cover">
     <div class="hairline"></div>
+
+    <div class="top-donate">
+      <div class="td-label">Top Donate</div>
+      <div class="td-window">
+        <div class="td-track">
+          <div class="td-row"><span class="td-rank">TOP 1</span><span>NGUYEN HOANG TAI</span><span class="td-amt">50K</span></div>
+          <div class="td-row"><span class="td-rank">TOP 2</span><span>LE PHAT DAT</span><span class="td-amt">35K</span></div>
+          <div class="td-row"><span class="td-rank">TOP 3</span><span>DANG THI MY DUYEN</span><span class="td-amt">30K</span></div>
+          <div class="td-row"><span class="td-rank">TOP 4</span><span>NGUYEN VAN TRUNG</span><span class="td-amt">12K</span></div>
+          <div class="td-row"><span class="td-rank">TOP 1</span><span>NGUYEN HOANG TAI</span><span class="td-amt">50K</span></div>
+          <div class="td-row"><span class="td-rank">TOP 2</span><span>LE PHAT DAT</span><span class="td-amt">35K</span></div>
+          <div class="td-row"><span class="td-rank">TOP 3</span><span>DANG THI MY DUYEN</span><span class="td-amt">30K</span></div>
+          <div class="td-row"><span class="td-rank">TOP 4</span><span>NGUYEN VAN TRUNG</span><span class="td-amt">12K</span></div>
+        </div>
+      </div>
+    </div>
+
     <div class="clock-widget" id="clockWidget">
       <div class="time" id="clockTime">--:--</div>
       <div class="msg" id="clockMsg"></div>
