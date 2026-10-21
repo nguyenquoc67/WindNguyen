@@ -33,7 +33,7 @@
   }
   .page{
     width:100%;
-    max-width:460px;
+    max-width:460px; /* mobile mặc định, desktop xem media query cuối */
     min-height:100vh;
     position:relative;
     overflow:hidden;
@@ -452,68 +452,6 @@
     display:block;
   }
 
-  /* ===== top donate board (top-left) ===== */
-  .top-donate{
-    position:absolute;
-    top:14px; left:14px;
-    width:150px;
-    z-index:6;
-  }
-  .top-donate .td-label{
-    font-size:9.5px;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-    color:var(--gold-soft);
-    margin-bottom:5px;
-    text-shadow:0 0 10px rgba(205,164,94,0.3);
-  }
-  .top-donate .td-window{
-    height:56px;
-    overflow:hidden;
-    width:100%;
-    -webkit-mask-image:linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
-    mask-image:linear-gradient(to bottom, transparent 0%, #000 15%, #000 85%, transparent 100%);
-  }
-  .top-donate .td-track{
-    display:flex;
-    flex-direction:column;
-    animation: donateScroll 9s linear infinite;
-  }
-  .top-donate .td-row{
-    height:19px;
-    display:flex;
-    align-items:center;
-    gap:5px;
-    font-size:10px;
-    color:#d8d6cf;
-    width:100%;
-  }
-  .top-donate .td-rank{
-    font-family:'Cormorant Garamond', serif;
-    font-weight:600;
-    color:var(--gold-soft);
-    font-size:10.5px;
-    flex:0 0 auto;
-    white-space:nowrap;
-  }
-  .top-donate .td-name{
-    flex:1 1 auto;
-    min-width:0;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-  }
-  .top-donate .td-amt{
-    flex:0 0 auto;
-    color:var(--gold-soft);
-    font-weight:600;
-    white-space:nowrap;
-  }
-  @keyframes donateScroll{
-    0%{ transform:translateY(0); }
-    100%{ transform:translateY(-50%); }
-  }
-
   /* ===== qr stickers ===== */
   .qr-wrap{ position:relative; }
   .qr-sticker{
@@ -545,6 +483,105 @@
     white-space:nowrap;
     pointer-events:none;
   }
+
+  /* ===== WIDE LAYOUT (desktop/tablet) ===== */
+  @media (min-width: 720px){
+    .page{ max-width:880px; }
+    .cover{ height:210px; }
+    .clock-widget{ top:20px; right:28px; }
+    .clock-widget .time{ font-size:28px; }
+    .clock-widget .msg{ font-size:14px; max-width:220px; }
+    .flag-corner{ top:108px; width:64px; }
+    .profile{ margin-top:-60px; }
+    .bio{ max-width:560px; font-size:15px; }
+    .links{
+      padding:0 32px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:14px;
+    }
+    .donate{ margin:32px 32px 0; }
+    .donate-msg{ max-width:520px; font-size:20px; }
+  }
+  @media (min-width: 1100px){
+    .page{ max-width:1000px; }
+    .links{ grid-template-columns:repeat(3, 1fr); }
+  }
+
+  /* ===== KHU VỰC THÊM CHI TIẾT MỚI (section) ===== */
+  .section{
+    margin:28px 20px 0;
+    background:var(--card);
+    border:1px solid var(--card-line);
+    border-radius:16px;
+    padding:22px 20px 24px;
+    position:relative;
+  }
+  .section::before{
+    content:"";
+    position:absolute; top:0; left:16px; right:16px; height:1px;
+    background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  }
+  .section-title{
+    font-family:'Cormorant Garamond', serif;
+    font-weight:600;
+    font-style:italic;
+    font-size:15px;
+    letter-spacing:.18em;
+    color:var(--gold-soft);
+    text-transform:uppercase;
+    margin-bottom:16px;
+    text-align:center;
+    text-shadow:0 0 12px rgba(205,164,94,0.25);
+  }
+  .section-grid{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:12px;
+  }
+  .info-item{
+    background:#0f0f11;
+    border:1px solid var(--card-line);
+    border-radius:12px;
+    padding:14px 16px;
+  }
+  .info-item h4{ font-family:'Cormorant Garamond', serif; font-size:18px; font-weight:600; letter-spacing:.03em; color:var(--gold-soft); margin-bottom:4px; }
+  .info-item p{ font-size:13px; line-height:1.55; color:#c7c5bd; }
+  @media (min-width: 720px){
+    .section{ margin:32px 32px 0; padding:26px 26px 28px; }
+    .section-grid{ grid-template-columns:1fr 1fr; gap:14px; }
+  }
+  @media (min-width: 1100px){
+    .section-grid{ grid-template-columns:repeat(3, 1fr); }
+  }
+
+  /* ===== bảng xếp hạng trong khối Donate xu ===== */
+  .rank-list{ margin-top:10px; display:flex; flex-direction:column; gap:8px; }
+  .rank-row{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Cormorant Garamond', serif;
+    font-size:15.5px; color:#ece7da;
+    padding:9px 12px; border-radius:8px;
+    background:#141416; border:1px solid var(--card-line);
+  }
+  .rank-no{
+    font-weight:600;
+    color:var(--gold-soft); font-size:14.5px; letter-spacing:.04em; flex:0 0 auto; white-space:nowrap;
+    display:flex; align-items:center; gap:6px;
+  }
+  .rank-no .medal{ font-size:16px; line-height:1; }
+  .rank-name{ flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; letter-spacing:.02em; }
+  .rank-val{ flex:0 0 auto; color:var(--gold-soft); font-weight:600; letter-spacing:.02em; white-space:nowrap; }
+  .rank-row.r1{
+    background:linear-gradient(90deg, rgba(205,164,94,0.14), #141416 55%);
+    border-color:rgba(205,164,94,0.55);
+    box-shadow:0 0 16px rgba(205,164,94,0.12);
+  }
+  .rank-row.r2{ border-color:rgba(205,164,94,0.30); }
+  .rank-row.r3{ border-color:rgba(205,164,94,0.20); }
+  .info-item h4{ display:flex; align-items:center; gap:6px; }
+  @media (min-width: 720px){ .section-grid.two-col{ grid-template-columns:1fr 1fr; } }
+  @media (min-width: 1100px){ .section-grid.two-col{ grid-template-columns:1fr 1fr; } }
 </style>
 </head>
 <body>
@@ -571,22 +608,6 @@
 
   <div class="cover">
     <div class="hairline"></div>
-
-    <div class="top-donate">
-      <div class="td-label">Top Donate</div>
-      <div class="td-window">
-        <div class="td-track">
-          <div class="td-row"><span class="td-rank">TOP 1</span><span class="td-name">NGUYEN HOANG TAI</span><span class="td-amt">50K</span></div>
-          <div class="td-row"><span class="td-rank">TOP 2</span><span class="td-name">LE PHAT DAT</span><span class="td-amt">35K</span></div>
-          <div class="td-row"><span class="td-rank">TOP 3</span><span class="td-name">DANG THI MY DUYEN</span><span class="td-amt">30K</span></div>
-          <div class="td-row"><span class="td-rank">TOP 4</span><span class="td-name">NGUYEN VAN TRUNG</span><span class="td-amt">12K</span></div>
-          <div class="td-row"><span class="td-rank">TOP 1</span><span class="td-name">NGUYEN HOANG TAI</span><span class="td-amt">50K</span></div>
-          <div class="td-row"><span class="td-rank">TOP 2</span><span class="td-name">LE PHAT DAT</span><span class="td-amt">35K</span></div>
-          <div class="td-row"><span class="td-rank">TOP 3</span><span class="td-name">DANG THI MY DUYEN</span><span class="td-amt">30K</span></div>
-          <div class="td-row"><span class="td-rank">TOP 4</span><span class="td-name">NGUYEN VAN TRUNG</span><span class="td-amt">12K</span></div>
-        </div>
-      </div>
-    </div>
 
     <div class="clock-widget" id="clockWidget">
       <div class="time" id="clockTime">--:--</div>
@@ -618,6 +639,32 @@
       <div class="arrow">›</div>
     </a>
 
+  </div>
+
+  <!-- ====== DONATE XU: sửa tên/số xu/STK trong các .rank-row ====== -->
+  <div class="section">
+    <div class="section-title">Donate xu</div>
+    <div class="section-grid two-col">
+
+      <div class="info-item">
+        <h4>🪙 Top XU · Tháng 10</h4>
+        <div class="rank-list">
+          <div class="rank-row r1"><span class="rank-no"><span class="medal">🥇</span>TOP 1</span><span class="rank-name">Ngọc Linh</span><span class="rank-val">1000 xu</span></div>
+          <div class="rank-row r2"><span class="rank-no"><span class="medal">🥈</span>TOP 2</span><span class="rank-name">Dề Chin</span><span class="rank-val">680 xu</span></div>
+          <div class="rank-row r3"><span class="rank-no"><span class="medal">🥉</span>TOP 3</span><span class="rank-name">Cáo là Lie</span><span class="rank-val">75 xu</span></div>
+        </div>
+      </div>
+
+      <div class="info-item">
+        <h4>💳 Top STK · Tháng 10</h4>
+        <div class="rank-list">
+          <div class="rank-row r1"><span class="rank-no"><span class="medal">🥇</span>TOP 1</span><span class="rank-name">Dề Chin</span><span class="rank-val">479K</span></div>
+          <div class="rank-row r2"><span class="rank-no"><span class="medal">🥈</span>TOP 2</span><span class="rank-name">Ngọc Phương</span><span class="rank-val">100K</span></div>
+          <div class="rank-row r3"><span class="rank-no"><span class="medal">🥉</span>TOP 3</span><span class="rank-name">SEA</span><span class="rank-val">10K</span></div>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <div class="donate">
